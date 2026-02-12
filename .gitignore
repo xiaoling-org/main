@@ -1,0 +1,26 @@
+# 忽略项目目录中的Git子模块
+projects/github/
+
+# 忽略临时文件
+temp/
+logs/
+*.log
+
+# 忽略可执行文件
+*.exe
+*.msi
+*.zip
+
+# 忽略密钥文件（安全）
+github_ssh_key
+github_ssh_key.pub
+
+# 忽略IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 忽略系统文件
+.DS_Store
+Thumbs.db
