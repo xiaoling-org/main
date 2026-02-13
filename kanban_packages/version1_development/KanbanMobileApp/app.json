@@ -1,0 +1,38 @@
+{
+  "name": "KanbanMobileApp",
+  "displayName": "小灵看板",
+  "expo": {
+    "name": "小灵看板",
+    "slug": "kanban-mobile-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.xiaoling.kanban"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.xiaoling.kanban"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "apiUrl": "http://localhost:5000/api",
+      "telegramBotToken": "YOUR_TELEGRAM_BOT_TOKEN"
+    }
+  }
+}

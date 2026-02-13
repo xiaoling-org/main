@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 小灵同学看板系统 v3.0 - 增强版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .version-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        .main-content {
+            padding: 30px;
+            min-height: 600px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card li:last-child {
+            border-bottom: none;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+        }
+
+        .quick-start {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+        }
+
+        .quick-start h3 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .access-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .access-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .url-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+
+        .url-box a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .url-box a:hover {
+            text-decoration: underline;
+        }
+
+        .system-status {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .system-status h3 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .status-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .status-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .status-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .welcome-section {
+                padding: 30px 15px;
+            }
+            
+            .welcome-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="version-badge">v3.0 增强版</div>
+            <h1>🎯 小灵同学看板系统</h1>
+            <p>标签分类 · 搜索过滤 · 评论讨论 · 导入导出 · 实时协作</p>
+        </div>
+
+        <div class="main-content">
+            <div class="welcome-section">
+                <h2>欢迎使用看板系统！</h2>
+                <p>这是一个功能强大的任务管理工具，支持多用户实时协作、标签分类、搜索过滤等功能。</p>
+                <p>系统正在加载中，请稍候...</p>
+                <div class="loading">正在连接服务器</div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3><span class="icon">🏷️</span> 标签分类系统</h3>
+                    <ul>
+                        <li><span class="icon">🔴</span> 紧急任务标记</li>
+                        <li><span class="icon">🟡</span> 重要事项提醒</li>
+                        <li><span class="icon">🟢</span> 日常任务管理</li>
+                        <li><span class="icon">🔵</span> 长期项目跟踪</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="icon">🔍</span> 智能搜索过滤</h3>
+                    <ul>
+                        <li><span class="icon">📝</span> 关键词全文搜索</li>
+                        <li><span class="icon">🏷️</span> 标签快速筛选</li>
+                        <li><span class="icon">📊</span> 状态条件过滤</li>
+                        <li><span class="icon">🔗</span> 组合搜索查询</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="icon">💬</span> 实时协作功能</h3>
+                    <ul>
+                        <li><span class="icon">👥</span> 多用户同时编辑</li>
+                        <li><span class="icon">⚡</span> 实时数据同步</li>
+                        <li><span class="icon">💭</span> 任务评论讨论</li>
+                        <li><span class="icon">📱</span> 移动端适配</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quick-start">
+                <h3>快速开始指南</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>启动服务器</h4>
+                        <p>双击运行 start_kanban.exe 或 start_kanban.bat 文件启动系统</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>访问系统</h4>
+                        <p>在浏览器中输入显示的访问地址，即可开始使用</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>创建任务</h4>
+                        <p>点击"添加任务"按钮，填写任务信息并保存</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>协作使用</h4>
+                        <p>分享访问地址给团队成员，实现多人实时协作</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="access-info">
+                <h3>访问地址</h3>
+                <p>系统启动后，请使用以下地址访问：</p>
+                <div class="url-box">
+                    <div>电脑访问：<a href="http://localhost:5000" target="_blank">http://localhost:5000</a></div>
+                    <div>手机访问：<a href="http://[电脑IP地址]:5000" target="_blank">http://[电脑IP地址]:5000</a></div>
+                </div>
+                <p>请确保手机和电脑在同一WiFi网络下</p>
+            </div>
+
+            <div class="system-status">
+                <h3>系统状态</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-label">服务器状态</div>
+                        <div class="status-value" id="server-status">等待启动</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">WebSocket</div>
+                        <div class="status-value" id="websocket-status">等待连接</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">数据存储</div>
+                        <div class="status-value" id="data-status">就绪</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">实时协作</div>
+                        <div class="status-value" id="collab-status">启用</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 小灵同学看板系统 v3.0 - 增强版</p>
+            <p>技术支持：小灵同学助理 | 解压即用版本</p>
+            <p>系统设计：无需安装Python，双击即可运行</p>
+        </div>
+    </div>
+
+    <script>
+        // 自动重定向到看板页面
+        setTimeout(function() {
+            window.location.href = '/kanban';
+        }, 3000);
+
+        // 更新状态显示
+        function updateStatus() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('server-status').textContent = '运行中';
+                    document.getElementById('websocket-status').textContent = '已连接';
+                    document.getElementById('data-status').textContent = '正常';
+                    document.getElementById('collab-status').textContent = '活跃';
+                })
+                .catch(error => {
+                    console.log('等待服务器启动...');
+                });
+        }
+
+        // 每2秒检查一次状态
+        setInterval(updateStatus, 2000);
+        updateStatus();
+    </script>
+</body>
+</html>
